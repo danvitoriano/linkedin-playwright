@@ -2,7 +2,10 @@ import { chromium, type Locator, type Page } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_MESSAGE } from "./message.js";
+import { loadEnv } from "./env.js";
+import { DEFAULT_MESSAGE, MESSAGE_CONFIGURED } from "./message.js";
+
+loadEnv();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = path.join(__dirname, "linkedin-auth.json");
@@ -15,6 +18,18 @@ const INVITATIONS_URL =
   "https://www.linkedin.com/mynetwork/invitation-manager/";
 
 async function main() {
+  if (!process.env.LINKEDIN_MESSAGE && !MESSAGE_CONFIGURED) {
+    console.error(`
+Mensagem não configurada.
+
+  • Edite message.ts, personalize DEFAULT_MESSAGE e defina MESSAGE_CONFIGURED = true
+  • ou defina LINKEDIN_MESSAGE no arquivo .env
+
+Rode npm run setup se ainda não tiver um arquivo .env.
+`);
+    process.exit(1);
+  }
+
   if (!fs.existsSync(STATE_PATH)) {
     console.error(`Sessão não encontrada. Rode primeiro: npm run login`);
     process.exit(1);

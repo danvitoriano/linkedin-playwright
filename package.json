@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "setup": "tsx setup.ts",
     "login": "tsx login.ts",
     "run": "tsx run.ts",
     "postinstall": "playwright install chromium"

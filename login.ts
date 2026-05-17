@@ -14,8 +14,9 @@ async function main() {
     waitUntil: "domcontentloaded",
   });
 
-  console.log("\n1. Faça login no navegador que abriu.");
-  console.log("2. Quando estiver no feed (página inicial), volte aqui e pressione Enter.\n");
+  console.log("\n1. Faça login com a sua conta LinkedIn no navegador que abriu.");
+  console.log("2. Quando estiver no feed (página inicial), volte aqui e pressione Enter.");
+  console.log("   A sessão será salva localmente — não é enviada para lugar nenhum.\n");
 
   await waitForEnter();
 

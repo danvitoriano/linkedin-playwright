@@ -1,19 +1,13 @@
-export const DEFAULT_MESSAGE = `Olá, obrigado por se conectar comigo! Boas vindas à minha rede!
+/**
+ * Defina como `true` depois de personalizar DEFAULT_MESSAGE abaixo.
+ * Enquanto for `false`, `npm run run` não inicia (evita enviar texto de exemplo).
+ * Você também pode pular isso definindo LINKEDIN_MESSAGE no arquivo .env.
+ */
+export const MESSAGE_CONFIGURED = false;
 
-Quer conhecer mais sobre o trabalho que eu faço? No meu site danvitoriano.com.br conto toda a minha história e meus projetos, além de alguns materiais gratuitos pra download.
+export const DEFAULT_MESSAGE = `Olá! Obrigado por se conectar comigo — seja bem-vindo(a) à minha rede.
 
-Em links.danvitoriano.com.br você tem acesso aos cursos que eu promovo, cupons de desconto e algumas iniciativas gratuitas.
-
-Não deixa de acompanhar também a minha newsletter no Substack: danvitoriano.substack.com
-
-No YouTube tem muitos vídeos sobre tecnologia e os meus podcasts Orgulho Tech e Tech 40+: youtube.com/@danvitoriano
-
-Estou começando também uma nova startup especializada em agentes de IA para o mercado financeiro. Se quiser acompanhar essa novidade, já segue a página no LinkedIn: linkedin.com/company/diferentiaofc
-
-E se quiser fazer parte do meu grupo fechado, é só responder essa mensagem com "quero".
-
-Te espero por lá e aqui!
+[Escreva aqui sua mensagem: o que você faz, links úteis, como podem te encontrar, etc.]
 
 Abs,
-
-Dan Vitoriano`;
+Seu Nome`;
