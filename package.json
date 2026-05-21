@@ -7,6 +7,15 @@
     "setup": "tsx setup.ts",
     "login": "tsx login.ts",
     "run": "tsx run.ts",
+    "pptx:setup": "cd pptx && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt",
+    "pptx:sample": "cd pptx && .venv/bin/python create-sample.py",
+    "pptx:notes": "cd pptx && .venv/bin/python add-notes.py",
+    "pptx:notes:example": "cd pptx && .venv/bin/python create-sample.py && .venv/bin/python add-notes.py example.pptx notes.example.txt",
+    "pptx:fiap:build": "cd pptx && .venv/bin/python build_fiap_notes.py",
+    "pptx:fiap:v1": "cd pptx && .venv/bin/python apply_fiap.py --revision v1",
+    "pptx:fiap:v2": "cd pptx && .venv/bin/python apply_fiap.py --revision v2",
+    "hands-on:setup": "cd hands-on/react-agent && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt",
+    "hands-on:react": "cd hands-on/react-agent && .venv/bin/python react_demo.py",
     "postinstall": "playwright install chromium"
   },
   "dependencies": {

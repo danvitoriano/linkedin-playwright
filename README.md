@@ -69,6 +69,16 @@ O arquivo `.env` é carregado automaticamente ao rodar `npm run run`.
 
 Se preferir montar o projeto do zero em vez de clonar, use [`PROMPT.md`](./PROMPT.md): copie o prompt para o assistente e peça para gerar a mesma estrutura (Playwright, TypeScript, login com `storageState`, aceitar convites, mensagem configurável).
 
+## Experimento: notas do apresentador (PPTX)
+
+Na branch `feat/pptx-presenter-notes`, a pasta [`pptx/`](./pptx/) adiciona notas do apresentador a um `.pptx` a partir de um arquivo `.txt` ou `.json` (Python + `python-pptx`). Veja [`pptx/README.md`](./pptx/README.md).
+
+```bash
+npm run pptx:setup
+npm run pptx:notes -- caminho/apresentacao.pptx caminho/notas.txt
+npm run pptx:fiap:v2   # após colar roteiro em pptx/notes/roteiro-v2.txt
+```
+
 ## Estrutura
 
 ```
@@ -78,6 +88,7 @@ Se preferir montar o projeto do zero em vez de clonar, use [`PROMPT.md`](./PROMP
 ├── env.ts          # Carrega .env
 ├── setup.ts        # Configuração inicial
 ├── .env.example
+├── pptx/           # Notas do apresentador em PPTX (experimento)
 └── PROMPT.md       # Spec para recriar com IA
 ```
 

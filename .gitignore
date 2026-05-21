@@ -3,3 +3,10 @@ linkedin-auth.json
 .env
 playwright-report/
 test-results/
+.DS_Store
+**/__pycache__/
+*.pyc
+pptx/.venv/
+pptx/*.pptx
+hands-on/**/.venv/
+hands-on/**/.env

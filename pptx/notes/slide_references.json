@@ -1,0 +1,164 @@
+{
+  "bookmark_folder": "Agentes IA - Recursos",
+  "slides": {
+    "5": [
+      {
+        "num": "03",
+        "recurso": "ReAct",
+        "autor": "Yao et al., 2023",
+        "funcao": "Ciclo de Pensamento, Ação e Observação",
+        "deck_slide": "O Framework ReAct: Pensar antes de agir",
+        "integracao": "Código / Lógica de Agente",
+        "url": "https://arxiv.org/abs/2210.03629"
+      }
+    ],
+    "6": [
+      {
+        "num": "04",
+        "recurso": "LangChain",
+        "autor": "",
+        "funcao": "Importação e carregamento de ferramentas para agentes",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "Código (Python)",
+        "url": "https://www.langchain.com"
+      },
+      {
+        "num": "05",
+        "recurso": "SerpAPI",
+        "autor": "",
+        "funcao": "Busca na web para agentes",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "API",
+        "url": "https://serpapi.com"
+      },
+      {
+        "num": "06",
+        "recurso": "LLM-Math",
+        "autor": "",
+        "funcao": "Realização de cálculos matemáticos",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "Código / Biblioteca",
+        "url": "https://api.python.langchain.com/en/latest/chains/langchain.chains.llm_math.base.LLMMathChain.html"
+      }
+    ],
+    "7": [
+      {
+        "num": "04",
+        "recurso": "LangChain",
+        "autor": "",
+        "funcao": "Importação e carregamento de ferramentas para agentes",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "Código (Python)",
+        "url": "https://www.langchain.com"
+      },
+      {
+        "num": "05",
+        "recurso": "SerpAPI",
+        "autor": "",
+        "funcao": "Busca na web para agentes",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "API",
+        "url": "https://serpapi.com"
+      },
+      {
+        "num": "06",
+        "recurso": "LLM-Math",
+        "autor": "",
+        "funcao": "Realização de cálculos matemáticos",
+        "deck_slide": "HANDS ON - Implementando ReAct - Parte 1",
+        "integracao": "Código / Biblioteca",
+        "url": "https://api.python.langchain.com/en/latest/chains/langchain.chains.llm_math.base.LLMMathChain.html"
+      }
+    ],
+    "8": [
+      {
+        "num": "01",
+        "recurso": "Agentic Workflow",
+        "autor": "Andrew Ng",
+        "funcao": "Superar o tamanho do modelo através de fluxos de trabalho",
+        "deck_slide": "Zero-Shot vs. Agentic Workflow",
+        "integracao": "Conceitual / Fluxo de Trabalho",
+        "url": "https://youtube.com/watch?v=sal78ACtGTc"
+      }
+    ],
+    "9": [
+      {
+        "num": "02",
+        "recurso": "LLM Powered Autonomous Agents",
+        "autor": "Lilian Weng (2023)",
+        "funcao": "Saturação de contexto e sobrecarga cognitiva",
+        "deck_slide": "O Gargalo da Complexidade",
+        "integracao": "Teórico",
+        "url": "https://lilianweng.github.io/posts/2023-06-23-agent/"
+      }
+    ],
+    "12": [
+      {
+        "num": "10",
+        "recurso": "Devin AI",
+        "autor": "",
+        "funcao": "Leitura de documentação, issues e clonagem de repositórios",
+        "deck_slide": "Revolução no Mercado: O Case Devin",
+        "integracao": "Código / Software",
+        "url": "https://devin.ai"
+      },
+      {
+        "num": "13",
+        "recurso": "GitHub",
+        "autor": "",
+        "funcao": "Hospedagem de repositórios e gestão de issues",
+        "deck_slide": "Revolução no Mercado: O Case Devin",
+        "integracao": "API / Web",
+        "url": "https://github.com"
+      }
+    ],
+    "13": [
+      {
+        "num": "11",
+        "recurso": "Claude (Computer Use)",
+        "autor": "",
+        "funcao": "Controle de computador sem APIs tradicionais",
+        "deck_slide": "Tendências e Acessibilidade",
+        "integracao": "API / Visão Computacional",
+        "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool"
+      },
+      {
+        "num": "12",
+        "recurso": "Cursor",
+        "autor": "",
+        "funcao": "IDE de nova geração com IA",
+        "deck_slide": "Tendências e Acessibilidade",
+        "integracao": "Código / Software",
+        "url": "https://cursor.com"
+      },
+      {
+        "num": "09",
+        "recurso": "OpenClaw",
+        "autor": "",
+        "funcao": "Democratização do acesso a agentes",
+        "deck_slide": "Tendências e Acessibilidade",
+        "integracao": "No-code / Open-source",
+        "url": "https://github.com/openclaw/openclaw"
+      },
+      {
+        "num": "07",
+        "recurso": "CrewAI",
+        "autor": "",
+        "funcao": "Orquestração de multi-agentes",
+        "deck_slide": "Tendências e Acessibilidade",
+        "integracao": "Código / No-code",
+        "url": "https://crewai.com"
+      },
+      {
+        "num": "08",
+        "recurso": "n8n",
+        "autor": "",
+        "funcao": "Automação de fluxos sem código",
+        "deck_slide": "Tendências e Acessibilidade",
+        "integracao": "No-code",
+        "url": "https://n8n.io"
+      }
+    ],
+    "15": "all"
+  }
+}

@@ -1,0 +1,9 @@
+# Cole aqui o NOVO roteiro (versão 2) e apague estas linhas de comentário.
+# Formato: seções numeradas 1. a 11., separadas por linhas ---------------
+# (igual ao roteiro que você colou no chat da versão 1).
+#
+# Depois rode na raiz do repo:
+#   npm run pptx:fiap:v2
+#
+# Saída:
+#   .../AIAT_Fase 01_IA vs Agentes de IA_Aula 01_rev2-notas-v2.pptx
