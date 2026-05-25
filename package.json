@@ -7,6 +7,8 @@
     "setup": "tsx setup.ts",
     "login": "tsx login.ts",
     "run": "tsx run.ts",
+    "google-forms": "tsx google-forms.ts",
+    "google-forms:complete": "tsx google-forms-complete.ts",
     "pptx:setup": "cd pptx && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt",
     "pptx:sample": "cd pptx && .venv/bin/python create-sample.py",
     "pptx:notes": "cd pptx && .venv/bin/python add-notes.py",

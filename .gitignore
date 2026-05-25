@@ -10,3 +10,5 @@ pptx/.venv/
 pptx/*.pptx
 hands-on/**/.venv/
 hands-on/**/.env
+google-forms-data.ts
+RESPOSTAS-SENSEDIA.md
