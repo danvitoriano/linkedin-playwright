@@ -64,6 +64,7 @@ O arquivo `.env` é carregado automaticamente ao rodar `npm run run`.
 | `npm run setup` | Cria `.env` a partir de `.env.example` e mostra os próximos passos |
 | `npm run login` | Login manual e gravação da sessão |
 | `npm run run` | Aceita convites e envia mensagens |
+| `npm run jobs:search` | Busca vagas tech no LinkedIn Jobs (ver [`README-JOBS.md`](./README-JOBS.md)) |
 
 ## Recriar com IA (Cursor, Claude Code, etc.)
 
