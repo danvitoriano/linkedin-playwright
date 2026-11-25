@@ -1,6 +1,6 @@
 # linkedin-playwright
 
-Automação com [Playwright](https://playwright.dev/) para aceitar convites de conexão **recebidos** no LinkedIn e enviar uma mensagem de boas-vindas para cada novo contato.
+Automação com [Playwright](https://playwright.dev/) para aceitar convites de conexão **recebidos** no LinkedIn e enviar uma mensagem de boas-vindas para cada novo contato — por padrão, divulgando a sua newsletter do LinkedIn.
 
 Cada pessoa usa **a própria conta** (login manual no navegador) e **a própria mensagem** — nada de credenciais ou texto pessoal no repositório.
 
@@ -20,11 +20,11 @@ npm run setup
 
 Depois:
 
-1. **Mensagem** — edite [`message.ts`](./message.ts): troque o texto de exemplo e defina `MESSAGE_CONFIGURED = true`.
+1. **Newsletter** — preencha `NEWSLETTER_NAME` e `NEWSLETTER_URL` no `.env`. Para mudar o texto, edite [`message.ts`](./message.ts).
 2. **LinkedIn** — `npm run login`: faça login no navegador que abrir e pressione **Enter** no terminal quando estiver no feed. A sessão fica em `linkedin-auth.json` (local, ignorado pelo Git).
 3. **Executar** — `npm run run`: aceita convites na aba **Recebidos** e envia sua mensagem.
 
-Opcional: ajuste `MAX_INVITES` e `DELAY_MS` no arquivo `.env` (criado pelo `npm run setup`).
+Opcional: ajuste `MAX_INVITES` e `DELAY_MS` no arquivo `.env` (criado pelo `npm run setup`). O padrão aceita **todos** os convites pendentes.
 
 ## Configuração
 
@@ -40,18 +40,28 @@ Se a sessão expirar, rode `npm run login` de novo.
 
 ### Mensagem de boas-vindas
 
+O texto padrão em [`message.ts`](./message.ts) agradece a conexão e convida a pessoa a assinar a sua newsletter do LinkedIn, mencionando a parceria com a Oracle. O nome e o link vêm do `.env`:
+
+```env
+NEWSLETTER_NAME=Nome da sua newsletter
+NEWSLETTER_URL=https://www.linkedin.com/newsletters/...
+```
+
 | Forma | Quando usar |
 |-------|-------------|
-| [`message.ts`](./message.ts) | **Recomendado** — textos longos, várias linhas, fácil de editar |
-| `LINKEDIN_MESSAGE` no `.env` | Mensagem curta; use `\n` para quebras de linha |
+| `NEWSLETTER_NAME` / `NEWSLETTER_URL` no `.env` | **Recomendado** — mantém o texto padrão e só troca nome e link |
+| [`message.ts`](./message.ts) | Reescrever o texto, mudar a assinatura ou tirar a menção à Oracle |
+| `LINKEDIN_MESSAGE` no `.env` | Substituir a mensagem inteira; use `\n` para quebras de linha |
 
-Enquanto `MESSAGE_CONFIGURED` for `false` e `LINKEDIN_MESSAGE` não estiver no `.env`, `npm run run` **não inicia** — assim ninguém envia o texto de exemplo por engano.
+Sem `NEWSLETTER_URL` (e sem `LINKEDIN_MESSAGE`), `npm run run` **não inicia** — assim ninguém envia o convite para a newsletter sem o link da assinatura.
 
 ### Variáveis de ambiente (`.env`)
 
 | Variável | Padrão | Descrição |
 |----------|--------|-----------|
-| `MAX_INVITES` | `5` | Máximo de convites processados por execução |
+| `NEWSLETTER_NAME` | — | Nome da newsletter citado na mensagem |
+| `NEWSLETTER_URL` | — | Link de assinatura (**obrigatório**) |
+| `MAX_INVITES` | `0` | Convites por execução; `0` ou `todos` = sem limite |
 | `DELAY_MS` | `5000` | Pausa (ms) entre cada convite |
 | `LINKEDIN_MESSAGE` | — | Sobrescreve `message.ts` (opcional) |
 
@@ -82,7 +92,7 @@ npm run pptx:fiap:v2   # após colar roteiro em pptx/notes/roteiro-v2.txt
 ## Estrutura
 
 ```
-├── message.ts      # Sua mensagem + MESSAGE_CONFIGURED
+├── message.ts      # Mensagem da newsletter (nome/link via .env)
 ├── login.ts        # Login manual → linkedin-auth.json
 ├── run.ts          # Aceitar convites e enviar mensagens
 ├── env.ts          # Carrega .env
@@ -94,7 +104,8 @@ npm run pptx:fiap:v2   # após colar roteiro em pptx/notes/roteiro-v2.txt
 
 ## Observações
 
-- O LinkedIn altera o DOM com frequência. Se aceitar ou enviar mensagem falhar, pode ser necessário atualizar os seletores em `run.ts`.
+- O LinkedIn altera o DOM com frequência. Se aceitar ou enviar mensagem falhar, pode ser necessário atualizar os seletores em `run.ts`. Após 3 falhas seguidas ao aceitar, a execução para sozinha.
+- Aceitar **todos** os convites de uma vez envia muitas mensagens em sequência. O LinkedIn limita ações em volume e pode restringir a conta: comece com `MAX_INVITES` baixo, confira o resultado e aumente o `DELAY_MS` se aparecer algum aviso.
 - Use com moderação para respeitar os limites e os [termos de uso](https://www.linkedin.com/legal/user-agreement) da plataforma.
 - **Não commite** `linkedin-auth.json`, `.env` nem dados de sessão — estão no `.gitignore`.
 

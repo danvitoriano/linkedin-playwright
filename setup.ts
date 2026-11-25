@@ -21,8 +21,8 @@ function main() {
   console.log(`
 Próximos passos:
 
-  1. Edite message.ts com sua mensagem de boas-vindas
-     e defina MESSAGE_CONFIGURED = true
+  1. Preencha NEWSLETTER_NAME e NEWSLETTER_URL no .env
+     (ou edite message.ts para mudar o texto da mensagem)
 
   2. npm run login
      (faça login na sua conta LinkedIn no navegador)
@@ -30,7 +30,7 @@ Próximos passos:
   3. npm run run
      (aceita convites e envia as mensagens)
 
-Opcional: ajuste MAX_INVITES e DELAY_MS no arquivo .env
+Opcional: ajuste MAX_INVITES (0 = todos) e DELAY_MS no arquivo .env
 
 Alternativa: use PROMPT.md no Cursor ou Claude Code para recriar o projeto do zero.
 `);

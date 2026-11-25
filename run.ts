@@ -3,27 +3,42 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEnv } from "./env.js";
-import { DEFAULT_MESSAGE, MESSAGE_CONFIGURED } from "./message.js";
+import { buildMessage, isConfigured, newsletterConfig } from "./message.js";
 
 loadEnv();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const STATE_PATH = path.join(__dirname, "linkedin-auth.json");
 
-const MESSAGE = process.env.LINKEDIN_MESSAGE ?? DEFAULT_MESSAGE;
-const MAX_INVITES = Number(process.env.MAX_INVITES ?? "5");
+const MESSAGE = process.env.LINKEDIN_MESSAGE ?? buildMessage();
+const MAX_INVITES = parseMaxInvites(process.env.MAX_INVITES);
 const DELAY_MS = Number(process.env.DELAY_MS ?? "5000");
+
+/** Quantos convites processar. `0`, `all` ou `todos` = sem limite. */
+function parseMaxInvites(raw: string | undefined): number {
+  const value = raw?.trim().toLowerCase();
+  if (!value || value === "0" || value === "all" || value === "todos") {
+    return Infinity;
+  }
+
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : Infinity;
+}
+
+/** Após esta quantidade de falhas seguidas ao aceitar, a execução para. */
+const MAX_CONSECUTIVE_FAILURES = 3;
 
 const INVITATIONS_URL =
   "https://www.linkedin.com/mynetwork/invitation-manager/";
 
 async function main() {
-  if (!process.env.LINKEDIN_MESSAGE && !MESSAGE_CONFIGURED) {
+  if (!process.env.LINKEDIN_MESSAGE && !isConfigured()) {
     console.error(`
-Mensagem não configurada.
+Link da newsletter não configurado.
 
-  • Edite message.ts, personalize DEFAULT_MESSAGE e defina MESSAGE_CONFIGURED = true
-  • ou defina LINKEDIN_MESSAGE no arquivo .env
+  • Defina NEWSLETTER_URL (e NEWSLETTER_NAME) no arquivo .env
+  • ou preencha NEWSLETTER_URL em message.ts
+  • ou defina LINKEDIN_MESSAGE no .env para usar outro texto
 
 Rode npm run setup se ainda não tiver um arquivo .env.
 `);
@@ -43,13 +58,19 @@ Rode npm run setup se ainda não tiver um arquivo .env.
   const context = await browser.newContext({ storageState: STATE_PATH });
   const page = await context.newPage();
 
-  console.log(`Abrindo convites (máx. ${MAX_INVITES})...\n`);
+  const limitLabel = MAX_INVITES === Infinity ? "todos" : `máx. ${MAX_INVITES}`;
+  const { name: newsletterName } = newsletterConfig();
+  if (!process.env.LINKEDIN_MESSAGE) {
+    console.log(`Newsletter: ${newsletterName || "(sem nome)"}\n`);
+  }
+  console.log(`Abrindo convites (${limitLabel})...\n`);
   await page.goto(INVITATIONS_URL, { waitUntil: "domcontentloaded" });
   await sleep(3000);
 
   await openReceivedTab(page);
 
   let processed = 0;
+  let consecutiveFailures = 0;
 
   while (processed < MAX_INVITES) {
     const card = await findInvitationCard(page);
@@ -61,15 +82,31 @@ Rode npm run setup se ainda não tiver um arquivo .env.
     const name = await readCardName(card);
     const profilePath = await readProfilePath(card);
 
-    console.log(`[${processed + 1}/${MAX_INVITES}] ${name ?? "Contato"}`);
+    const progress =
+      MAX_INVITES === Infinity
+        ? `${processed + 1}`
+        : `${processed + 1}/${MAX_INVITES}`;
+    console.log(`[${progress}] ${name ?? "Contato"}`);
 
     const accepted = await clickAccept(card);
     if (!accepted) {
-      console.log("  Não foi possível aceitar — pulando.");
+      consecutiveFailures++;
+      console.log(
+        `  Não foi possível aceitar (${consecutiveFailures}/${MAX_CONSECUTIVE_FAILURES}).`,
+      );
+
+      if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+        console.log(
+          "  Falhas seguidas demais — os seletores podem ter mudado. Encerrando.",
+        );
+        break;
+      }
+
       await sleep(DELAY_MS);
       continue;
     }
 
+    consecutiveFailures = 0;
     console.log("  Convite aceito.");
     await sleep(2000);
 
