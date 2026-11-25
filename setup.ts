@@ -21,8 +21,7 @@ function main() {
   console.log(`
 Próximos passos:
 
-  1. Preencha NEWSLETTER_NAME e NEWSLETTER_URL no .env
-     (ou edite message.ts para mudar o texto da mensagem)
+  1. (Opcional) Edite message.ts para mudar o texto da mensagem
 
   2. npm run login
      (faça login na sua conta LinkedIn no navegador)

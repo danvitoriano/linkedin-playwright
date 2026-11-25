@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEnv } from "./env.js";
-import { buildMessage, isConfigured, newsletterConfig } from "./message.js";
+import { buildMessage } from "./message.js";
 
 loadEnv();
 
@@ -32,19 +32,6 @@ const INVITATIONS_URL =
   "https://www.linkedin.com/mynetwork/invitation-manager/";
 
 async function main() {
-  if (!process.env.LINKEDIN_MESSAGE && !isConfigured()) {
-    console.error(`
-Link da newsletter não configurado.
-
-  • Defina NEWSLETTER_URL (e NEWSLETTER_NAME) no arquivo .env
-  • ou preencha NEWSLETTER_URL em message.ts
-  • ou defina LINKEDIN_MESSAGE no .env para usar outro texto
-
-Rode npm run setup se ainda não tiver um arquivo .env.
-`);
-    process.exit(1);
-  }
-
   if (!fs.existsSync(STATE_PATH)) {
     console.error(`Sessão não encontrada. Rode primeiro: npm run login`);
     process.exit(1);
@@ -59,10 +46,6 @@ Rode npm run setup se ainda não tiver um arquivo .env.
   const page = await context.newPage();
 
   const limitLabel = MAX_INVITES === Infinity ? "todos" : `máx. ${MAX_INVITES}`;
-  const { name: newsletterName } = newsletterConfig();
-  if (!process.env.LINKEDIN_MESSAGE) {
-    console.log(`Newsletter: ${newsletterName || "(sem nome)"}\n`);
-  }
   console.log(`Abrindo convites (${limitLabel})...\n`);
   await page.goto(INVITATIONS_URL, { waitUntil: "domcontentloaded" });
   await sleep(3000);

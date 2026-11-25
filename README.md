@@ -20,7 +20,7 @@ npm run setup
 
 Depois:
 
-1. **Newsletter** — preencha `NEWSLETTER_NAME` e `NEWSLETTER_URL` no `.env`. Para mudar o texto, edite [`message.ts`](./message.ts).
+1. **Mensagem** — o texto padrão em [`message.ts`](./message.ts) já divulga a newsletter Fora da Bolha Tech. Edite o arquivo se quiser mudar.
 2. **LinkedIn** — `npm run login`: faça login no navegador que abrir e pressione **Enter** no terminal quando estiver no feed. A sessão fica em `linkedin-auth.json` (local, ignorado pelo Git).
 3. **Executar** — `npm run run`: aceita convites na aba **Recebidos** e envia sua mensagem.
 
@@ -40,27 +40,17 @@ Se a sessão expirar, rode `npm run login` de novo.
 
 ### Mensagem de boas-vindas
 
-O texto padrão em [`message.ts`](./message.ts) agradece a conexão e convida a pessoa a assinar a sua newsletter do LinkedIn, mencionando a parceria com a Oracle. O nome e o link vêm do `.env`:
-
-```env
-NEWSLETTER_NAME=Nome da sua newsletter
-NEWSLETTER_URL=https://www.linkedin.com/newsletters/...
-```
+O texto padrão em [`message.ts`](./message.ts) agradece a conexão e divulga o artigo da newsletter Fora da Bolha Tech em parceria com a Oracle.
 
 | Forma | Quando usar |
 |-------|-------------|
-| `NEWSLETTER_NAME` / `NEWSLETTER_URL` no `.env` | **Recomendado** — mantém o texto padrão e só troca nome e link |
-| [`message.ts`](./message.ts) | Reescrever o texto, mudar a assinatura ou tirar a menção à Oracle |
-| `LINKEDIN_MESSAGE` no `.env` | Substituir a mensagem inteira; use `\n` para quebras de linha |
-
-Sem `NEWSLETTER_URL` (e sem `LINKEDIN_MESSAGE`), `npm run run` **não inicia** — assim ninguém envia o convite para a newsletter sem o link da assinatura.
+| [`message.ts`](./message.ts) | **Recomendado** — editar `DEFAULT_MESSAGE` diretamente |
+| `LINKEDIN_MESSAGE` no `.env` | Substituir a mensagem inteira sem tocar no código; use `\n` para quebras de linha |
 
 ### Variáveis de ambiente (`.env`)
 
 | Variável | Padrão | Descrição |
 |----------|--------|-----------|
-| `NEWSLETTER_NAME` | — | Nome da newsletter citado na mensagem |
-| `NEWSLETTER_URL` | — | Link de assinatura (**obrigatório**) |
 | `MAX_INVITES` | `0` | Convites por execução; `0` ou `todos` = sem limite |
 | `DELAY_MS` | `5000` | Pausa (ms) entre cada convite |
 | `LINKEDIN_MESSAGE` | — | Sobrescreve `message.ts` (opcional) |
@@ -92,7 +82,7 @@ npm run pptx:fiap:v2   # após colar roteiro em pptx/notes/roteiro-v2.txt
 ## Estrutura
 
 ```
-├── message.ts      # Mensagem da newsletter (nome/link via .env)
+├── message.ts      # Mensagem de boas-vindas (DEFAULT_MESSAGE)
 ├── login.ts        # Login manual → linkedin-auth.json
 ├── run.ts          # Aceitar convites e enviar mensagens
 ├── env.ts          # Carrega .env

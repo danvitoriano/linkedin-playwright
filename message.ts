@@ -1,52 +1,20 @@
 /**
  * Mensagem enviada a cada novo contato depois que o convite é aceito.
  *
- * Preencha o nome e o link da newsletter abaixo (ou use NEWSLETTER_NAME e
- * NEWSLETTER_URL no `.env`). Enquanto o link estiver vazio, `npm run run`
- * não inicia — assim ninguém envia a mensagem sem o link da assinatura.
- *
- * Para um texto totalmente diferente, defina LINKEDIN_MESSAGE no `.env`.
+ * Para usar outro texto, defina LINKEDIN_MESSAGE no `.env` — ele sobrescreve
+ * tudo aqui.
  */
-export const NEWSLETTER_NAME = "";
-export const NEWSLETTER_URL = "";
+export const DEFAULT_MESSAGE = `Oi! Obrigado por se conectar comigo aqui no LinkedIn.
 
-/** Nome usado na assinatura da mensagem. */
-export const SIGNATURE = "Dan Vitoriano";
+Eu sou o Dan Vitoriano, falo de tecnologia e IA e hoje trabalho no mercado financeiro. Recentemente fiz uma parceria muito legal com uma das maiores empresas de tecnologia do mundo, a Oracle.
 
-type NewsletterConfig = {
-  name: string;
-  url: string;
-};
+Escrevi um artigo na minha newsletter Fora da Bolha Tech juntando a Oracle e a Mariah Carey. Assim como a Mariah "não conhece" a J.Lo, muita gente não sabe que a Oracle tem uma das clouds mais robustas do mundo, além de uma plataforma gigante de cursos, laboratórios e projetos prontos pra você estudar, testar e tirar certificações. Tudo gratuito.
 
-/** Lê a configuração do `.env` com fallback para as constantes acima. */
-export function newsletterConfig(): NewsletterConfig {
-  return {
-    name: process.env.NEWSLETTER_NAME?.trim() || NEWSLETTER_NAME,
-    url: process.env.NEWSLETTER_URL?.trim() || NEWSLETTER_URL,
-  };
-}
+Lá no artigo estão todos os links: https://www.linkedin.com/pulse/i-dont-know-her-dan-vitoriano-hsgfe/
 
-/** `true` quando há link de newsletter configurado. */
-export function isConfigured(): boolean {
-  return newsletterConfig().url.length > 0;
-}
+Se gostar, deixa uma curtida e um comentário, que me ajuda muito!`;
 
-/**
- * Monta a mensagem. Chame só depois de `loadEnv()` — os valores vêm do `.env`.
- */
 export function buildMessage(): string {
-  const { name, url } = newsletterConfig();
-  const title = name ? `a newsletter ${name}` : "a minha newsletter";
-
-  return `Olá! Obrigado por se conectar — seja bem-vindo(a) à minha rede.
-
-Escrevo ${title} aqui no LinkedIn, em parceria com a Oracle: cada edição traz conteúdo prático sobre tecnologia, IA e carreira.
-
-Se fizer sentido para você, a assinatura é por aqui:
-${url}
-
-Qualquer dúvida, me chama na mensagem.
-
-Abraço,
-${SIGNATURE}`;
+  return DEFAULT_MESSAGE;
 }
+
