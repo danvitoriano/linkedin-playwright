@@ -12,7 +12,9 @@ Escrevi um artigo na minha newsletter Fora da Bolha Tech juntando a Oracle e a M
 
 Lá no artigo estão todos os links: https://www.linkedin.com/pulse/i-dont-know-her-dan-vitoriano-hsgfe/
 
-Se gostar, deixa uma curtida e um comentário, que me ajuda muito!`;
+Se gostar, deixa uma curtida e um comentário, que me ajuda muito!
+
+Ah, e segue minha startup de cursos de IA, em breve vou lançar uma turma com acesso gratuito: https://www.linkedin.com/company/diferentiacursos/`;
 
 export function buildMessage(): string {
   return DEFAULT_MESSAGE;
